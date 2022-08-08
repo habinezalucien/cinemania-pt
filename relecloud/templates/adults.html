@@ -1,0 +1,449 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+	<html>
+	<head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		    <title>Cinemania - Adults</title>
+        
+        <link rel="stylesheet" type="text/css" href="{% static 'stylings/styles.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'stylings/fontawesome/css/all.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'stylings/bootstrap/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" type="text/javascript" href="{% static 'stylings/bootstrap/js/bootstrap.min.js' %}">
+        <script src="{% static 'stylings/bootstrap/dist/jquery.slim.min.js' %}"> </script>
+        <script src="{% static 'stylings/bootstrap/dist/bootstrap.min.js' %}"> </script>
+
+        <style type="text/css"> 
+            .right{
+                list-style: none;
+                display: block;
+            }
+            .right li {
+                float: left
+            }
+            .right li{
+                color: white;
+            }
+            .right .sub a {
+                text-align:center;
+                text-decoration: none;
+                color: white;
+                background: blue;                
+                padding: 10px 20px 12px 20px;
+                transition: background 0.2s ease-in-out 
+            }
+            .right .sub a:hover {
+                background: darkblue
+            }
+            .user {
+                font-size:  28px;
+                transition: color 0.2s ease-in-out 
+            }
+            .user:hover {
+                color: whitesmoke
+            }
+            .video {
+                text-decoration: none;
+            }
+              .stretch-card>.card {
+                width: 100%;
+                min-width: 100%
+            }
+
+            body {
+                background-color: #f9f9fa
+            }
+
+            .flex {
+                -webkit-box-flex: 1;
+                -ms-flex: 1 1 auto;
+                flex: 1 1 auto
+            }
+
+            @media (max-width:991.98px) {
+                .padding {
+                    padding: 1.5rem
+                }
+            }
+
+            @media (max-width:767.98px) {
+                .padding {
+                    padding: 1rem
+                }
+            }
+
+            .padding {
+                padding: 1rem
+            }
+
+            .carousel .item {
+                margin: 3px
+            }
+
+            .carousel .item img {
+                display: block;
+                width: 100%;
+                height: auto
+            }
+
+            .carousel .item {
+                margin: 3px
+            }
+
+            .carousel {
+                margin-bottom: 15px
+            }
+
+            .search-form .form-group {
+              float: right !important;
+              transition: all 0.35s, border-radius 0s;
+              width: 32px;
+              height: 1px;
+              background-color: #fff;
+              box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+              border-radius: 4px;
+              border: 1px solid #ccc;
+            }
+            .search-form .form-group input.form-control {
+              padding-right: 20px;
+              border: 0 none;
+              background: transparent;
+              box-shadow: none;
+              display:block;
+            }
+
+            .search-form .form-group:hover,
+            .search-form .form-group.hover {
+              width: 100%;
+              border-radius: 4px 25px 25px 4px;
+            }
+            .search-form .form-group span.form-control-feedback {
+              position: absolute;
+              top: -1px;
+              right: -2px;
+              z-index: 2;
+              display: block;
+              width: 34px;
+              height: 4px;
+              line-height: 34px;
+              text-align: center;
+              color: #3596e0;
+              left: initial;
+              font-size: 14px;
+            }
+
+            #sti
+            {
+              position: -webkit-sticky;
+              position: sticky;
+              top: 0;
+            }
+            
+            
+        </style>
+        
+        </head>
+        <body>
+          {% block content %}
+
+            <div class="fluid">
+  <nav style="background: #000000; box-shadow: box-show; opacity: 90%;" class="navbar navbar-expand-lg" id="sti">
+  <a class="navbar-brand" style="font-size: 25px;color: #fde135;" href="{% url 'movies' %}"><b>CINEMANIA</b></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span style="" class="navbar-toggler-icon"><i class="fa fa-settings"></i></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto" >
+      <li class="nav-item active">
+        <a class="nav-link text-whitesmoke active" href="{% url 'movies' %}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      {% comment %} <li class="nav-item">
+        <a class="nav-link text-whitesmoke" href="{% url 'movies' %}">Movies</a>
+      </li> {% endcomment %}
+        <li class="nav-item">
+        <a class="nav-link text-whitesmoke" href="{% url 'adults' %}">Adults</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-whitesmoke" href="{% url 'kids' %}">Kids</a>
+      </li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                  
+      {% if user.is_authenticated %}
+      <li class="nav-item">
+        <a class="nav-link text-whitesmoke" style="color:orange" href="{% url 'myfavs' user.id %}"><b>My favorite movies</b></a>
+      </li> 
+      {% endif %} 
+    </ul>
+
+    <div class="topnav">
+    <div class="search-container">
+      <form action="{% url 'search' %}" method="POST" > {% csrf_token %} 
+        <input type="text" placeholder="Search.." name="search">
+        <button type="submit"><i class="fa fa-search"></i></button>
+      </form>
+    </div>
+  </div>    
+    <ul class="right">
+      </a>
+        {% if user.is_authenticated %}        
+        <div>  
+          <a href="{% url 'profile' user.id %}">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">{{ user.username }}</button></a>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                   
+          <a href="{% url 'myMovies' user.id %}">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Manage Movies</button></a>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <a href="{% url 'logout' %}">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Log Out</button></a>
+          </div> 
+        {% else %}        
+        <div>
+          <a href="{% url 'login' %}">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Sign In</button></a>
+          <a href="{% url 'relecloud:signup' %}">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">SIgn Up</button></a>
+        </div>
+
+        {% endif %}
+      </li>
+      </ul>
+  </div>
+</nav>
+                <div>
+                    
+<div class="carousel slide" data-ride="carousel" style="z-index:-1">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img class="d-block w-100" src="{% static 'stylings/images/slides/rom01.jpg' %}" alt="Romance">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="{% static 'stylings/images/slides/rom02.jpg' %}" alt="Romance">
+    </div>
+  <div class="carousel-item">
+      <img class="d-block w-100" src="{% static 'stylings/images/slides/rom03.jpg' %}" alt="Romance">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="{% static 'stylings/images/slides/rom04.jpg' %}" alt="Romance">
+    </div>
+        <div class="carousel-item">
+      <img class="d-block w-100" src="{% static 'stylings/images/slides/rom7.jpg' %}" alt="Romance">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="{% static 'stylings/images/slides/rom8.jpg' %}" alt="Romance">
+    </div>
+  <div class="carousel-item">
+      <img class="d-block w-100" src="{% static 'stylings/images/slides/rom9.jpg' %}" alt="Romance">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="{% static 'stylings/images/slides/rom10.jpg' %}" alt="Romance">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="{% static 'stylings/images/slides/rom11.jpg' %}" alt="Romance">
+    </div>
+  <div class="carousel-item">
+      <img class="d-block w-100" src="{% static 'stylings/images/slides/rom12.jpg' %}" alt="Romance">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="{% static 'stylings/images/slides/rom13.jpg' %}" alt="Romance">
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+                    
+                            </div>
+                        </div>
+  
+
+          <section style="background-color: #eee;">
+            <div class="container py-5">
+
+              <div class="row">
+                <div class="col">
+                  <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+                    <ol class="breadcrumb mb-0">
+                      <div class="col-lg-6">
+                          <form action="{% url 'adFilter' %}" method="POST"> {% csrf_token %}
+                          <div class="row">
+                            <div class="col-sm-3">
+                              <p class="mb-0">Filter by: <a style="margin-left: 5px; font-size: 5px; width: 8px; text-align: center" class="rounded-circle btn btn-primary" title="Press Enter after typing your filter keyword"><i style="font-size: 12px; margin-left: -3px" class="fa fa-info"></i></a></p>
+                            </div>
+                            <div class="col-sm-4">
+                              <select name="filter" class="form-control">
+                                <option value="genre">Genre</option>
+                                <option value="release_date">Release Date</option>
+                                <option value="actors">Main Actors</option>
+                              </select>
+                            </div>
+                            <div class="col-sm-5">
+                              <input type="text" required name="value" class="form-control" placeholder="Filter Keyword...">
+                            </div>
+                          </div>
+                        </form>
+                        <div>
+                    </ol>
+                  </nav>
+
+
+              <div class="row">
+                {% if user.is_authenticated %}
+                {% for film in movies %}
+                <a href="{% url 'movie' film.id %}" style="text-decoration: none">
+                <div class="col-lg-4">
+                  <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <div style="height:25em">
+                        <img src="{{ film.poster.url }}" style="width: 100%; height:100%; object-fit:cover;" alt="{{ film.title }}">
+                        </div>
+                         {% if film.title|length > 25 %}
+                      <h5 class="my-3" style="text-align: left">{{ film.title|slice:25 }}...</h5>
+                      {% else %}
+                      <h5 class="my-3" style="text-align: left"><b>{{ film.title }}</b></h5>
+                      {% endif %}
+                      </a>
+                      {% comment %} <p class="text-muted mb-2" style="text-align: left" class="container" title="Published By {{ film.uploaded_by }}"><i style="color: blue; margin-right: 5px; font-size: 12px" class="btn btn-primary fa fa-user user"></i><b>{{ film.uploaded_by  }}</b></p> {% endcomment %}
+                      <p class="text-muted mb-4" style="text-align: left;"><b>Released on:</b>  {{ film.release_date }}</p>
+                      <p class="text-muted mb-4" style="text-align: left"><b>Uploaded by:</b>  {{ film.uploaded_by }}</p>
+                      <p class="text-muted mb-4" style="text-align: left"><b>Genre:</b>  {{ film.genre }}</p>
+
+                        <div style="display: inline; margin-top: -26px; margin-bottom: 15px; margin-left: 0px" class="container">
+                          {% comment %} <p class="text-muted mb-4" title="{{ likes }} Favorited this movie" style="float: left; color: #aaa" class="card-text">
+                              {{ likes }} Like(s) <br>
+                              </p> {% endcomment %}
+                   
+                              <div style="width: 30%; float: right;text-align: center" class="card-text">
+                             <div> 
+                                 <a href="{% url 'addToFavorites' film.id user.id %}" title="Add to Favorites"><i style="font-size: 20px; margin-left: 5px;color:#ff3a1f;" class="fa fa-heart"></i></a>
+                              <a href="{% url 'addTowatchList' film.id user.id %}" title="Add to Watch List"><i style="font-size: 20px; margin-left: 20px; color:gray" class="fa fa-list"></i></a>
+                              </div>
+                          </div>
+                                       </div>
+                  </div>
+                  </div>
+                </div>
+                            
+                  {% endfor %}
+                  {% else %}
+                  {% for film in movies %}
+                  <a  title="You must sign In first to watch this movie!" href="{% url 'movie' film.id %}" style="text-decoration: none">
+                    <div class="col-lg-4">
+                      <div class="card mb-4">
+                        <div class="card-body text-center">
+                          <div style="height:25em">
+                          <img src="{{ film.poster.url }}" style="width: 100%; height:100%; object-fit:cover;" alt="{{ film.title }}">
+                          </div>
+                             {% if film.title|length > 25 %}
+                             <h5 class="my-3" style="text-align: left">{{ film.title|slice:25 }}...</h5>
+                             {% else %}
+                             <h5 class="my-3" style="text-align: left"><b>{{ film.title }}</b></h5>
+                             {% endif %}
+                            </a>
+                          {% comment %} <p class="text-muted mb-2" style="text-align: left" class="container" title="Published By {{ film.uploaded_by }}"><i style="color: blue; margin-right: 5px; font-size: 12px" class="btn btn-primary fa fa-user user"></i><b>{{ film.uploaded_by  }}</b></p> {% endcomment %}
+                      <p class="text-muted mb-4" style="text-align: left;"><b>Released on:</b>  {{ film.release_date }}</p>
+                      <p class="text-muted mb-4" style="text-align: left"><b>Uploaded by:</b>  {{ film.uploaded_by }}</p>
+                      <p class="text-muted mb-4" style="text-align: left"><b>Genre:</b>  {{ film.genre }}</p>
+
+                            <div style="display: inline; margin-top: -26px; margin-bottom: 15px; margin-left: 0px" class="container">
+                              {% comment %} <p class="text-muted mb-4" title="{{ likes }} Favorited this movie" style="float: left; color: #aaa" class="card-text">
+                                  {{ likes }} Like(s) <br>
+                                  </p> {% endcomment %}
+                       
+                                  <div style="width: 30%; float: right;text-align: center" class="card-text">
+                                 <div> 
+                                     <a href="{% url 'login' %}" title="Add to Favorites"><i style="font-size: 20px; margin-left: 5px;color:#ff3a1f" class="fa fa-heart"></i></a>
+                                  <a href="{% url 'login' %}" title="Add to Watch List"><i style="font-size: 20px; margin-left: 20px;color:gray" class="fa fa-list"></i></a>
+                                  </div>
+                              </div>
+                                           </div>
+                      </div>
+                      </div>
+                    </div>
+                  {% endfor %}
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </section>   
+              </div>
+              </div>
+{% endblock %}
+<footer>
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-5 col-md-5 col-sm-4 col-xs-12">
+              <ul class="contact">
+                <p style="color: white; text-align: aut0;">Follow us on:</p>
+                <div class="mt-4">
+                  <!-- Facebook -->
+                  <a type="button" class="btn btn-floating btn-warning btn-lg"><i class="fab fa-facebook-f"></i></a>
+                  <!-- Twitter -->
+                  <a href="https://twitter.com/Terasedo" type="button" class="btn btn-floating btn-warning btn-lg"><i class="fab fa-twitter"></i></a>
+                  <!-- Google + -->
+                  <a type="button" class="btn btn-floating btn-warning btn-lg"><i class="fab fa-google-plus-g"></i></a>
+                </div>
+              </ul>
+          </div>
+          
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+              <ul class="contact">
+                <li>
+                  <a href="/movies">All Movies</a>
+                </li>
+
+                <li>
+                  <a href="/kids">Kids</a>
+                </li>
+              </ul>
+          </div>
+     
+          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+              <ul class="contact">
+                 <li>
+                      <a href="#"><i class="fa fa-phone"></i> (+250) 780 575 468</a>
+                 </li>
+
+                 <li>
+                  <a href="#"><i class="fa fa-phone"></i> (+250) 785  845 731</a>
+             </li>
+                 <li>
+                      <a href="#"><i class="fa fa-envelope"></i> cinemania@gmail.com</a>
+                 </li>
+               </ul>
+          </div>
+     </div> 
+  </div>  
+  <div class="bfooter">
+    <p style="color: white;"> @2022 Copyrights &copy; Cinemania </p>
+    </div>      
+</footer>     
+                
+            </div>
+        </body>
+</html>
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+$(".owl-carousel").owlCarousel({
+
+autoPlay: 3000,
+items : 4,
+itemsDesktop : [1199,3],
+itemsDesktopSmall : [979,3],
+center: true,
+nav:true,
+loop:true,
+responsive: {
+600: {
+items: 4
+}
+}
+</script>
+

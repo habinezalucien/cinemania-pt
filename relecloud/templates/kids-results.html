@@ -1,0 +1,320 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+	<html>
+	<head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		    <title>Cinemania - Kids</title>
+        
+        <link rel="stylesheet" type="text/css" href="{% static 'stylings/styles.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'stylings/fontawesome/css/all.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'stylings/bootstrap/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" type="text/javascript" href="{% static 'stylings/bootstrap/js/bootstrap.min.js' %}">
+        <script src="{% static 'stylings/bootstrap/dist/jquery.slim.min.js' %}"> </script>
+        <script src="{% static 'stylings/bootstrap/dist/bootstrap.min.js' %}"> </script>
+
+        <style type="text/css"> 
+            .right{
+                list-style: none;
+                display: block;
+            }
+            .right li {
+                float: left
+            }
+            .right li{
+                color: white;
+            }
+            .right .sub a {
+                text-align:center;
+                text-decoration: none;
+                color: white;
+                background: blue;                
+                padding: 10px 20px 12px 20px;
+                transition: background 0.2s ease-in-out 
+            }
+            .right .sub a:hover {
+                background: darkblue
+            }
+            .user {
+                font-size:  28px;
+                transition: color 0.2s ease-in-out 
+            }
+            .user:hover {
+                color: whitesmoke
+            }
+            .video {
+                text-decoration: none;
+            }
+              .stretch-card>.card {
+                width: 100%;
+                min-width: 100%
+            }
+
+            body {
+                background-color: #f9f9fa
+            }
+
+            .flex {
+                -webkit-box-flex: 1;
+                -ms-flex: 1 1 auto;
+                flex: 1 1 auto
+            }
+
+            @media (max-width:991.98px) {
+                .padding {
+                    padding: 1.5rem
+                }
+            }
+
+            @media (max-width:767.98px) {
+                .padding {
+                    padding: 1rem
+                }
+            }
+
+            .padding {
+                padding: 1rem
+            }
+
+            .carousel .item {
+                margin: 3px
+            }
+
+            .carousel .item img {
+                display: block;
+                width: 100%;
+                height: auto
+            }
+
+            .carousel .item {
+                margin: 3px
+            }
+
+            .carousel {
+                margin-bottom: 15px
+            }
+            .topnav {
+              overflow: hidden;
+              background-color: #e9e9e9;
+            }
+
+            .topnav .search-container {
+              float: right;
+            }
+            
+            .topnav input[type=text] {
+              padding: 6px;
+              margin-top: 8px;
+              font-size: 17px;
+              border: none;
+            }
+            
+            .topnav .search-container button {
+              float: right;
+              padding: 6px 10px;
+              margin-top: 8px;
+              margin-right: 16px;
+              background: #ddd;
+              font-size: 17px;
+              border: none;
+              cursor: pointer;
+            }
+            
+            .topnav .search-container button:hover {
+              background: #ccc;
+            }
+            
+            @media screen and (max-width: 600px) {
+              .topnav .search-container {
+                float: none;
+              }
+              .topnav a, .topnav input[type=text], .topnav .search-container button {
+                float: none;
+                display: block;
+                text-align: left;
+                width: 100%;
+                margin: 0;
+                padding: 14px;
+              }
+              .topnav input[type=text] {
+                border: 1px solid #ccc;  
+              }
+            }
+            
+        </style>
+        
+        </head>
+        <body>
+          {% block content %}
+
+            <div class="fluid">
+  <nav style="background: #000000; box-shadow: box-show;" class="navbar navbar-expand-lg">
+  <a class="navbar-brand" style="font-size: 25px" href="{% url 'movies' %}"><b>CINEMANIA</b></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span style="" class="navbar-toggler-icon"><i class="fa fa-settings"></i></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link text-whitesmoke active" href="{% url 'movies' %}">Home<span class="sr-only">(current)</span></a>
+      </li>
+      {% comment %} <li class="nav-item">
+        <a class="nav-link text-whitesmoke" href="{% url 'movies' %}">Movies</a>
+      </li> {% endcomment %}
+        <li class="nav-item">
+        <a class="nav-link text-whitesmoke" href="{% url 'adults' %}">Adults</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-whitesmoke" href="{% url 'kids' %}">Kids</a>
+      </li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                  
+      {% if user.is_authenticated %}
+      <li class="nav-item">
+        <a class="nav-link text-whitesmoke" style="color:orange" href="{% url 'myfavs' user.id %}"><b>My favorite movies</b></a>
+      </li> 
+      {% endif %} 
+    </ul>
+
+    <div class="topnav">
+      <div class="search-container">
+        <form action="{% url 'search' %}" method="POST" > {% csrf_token %} 
+          <input type="text" placeholder="Search.." name="search">
+          <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+      </div>
+    </div>
+
+    <ul class="right">
+        {% if user.is_authenticated %}
+        <div>
+          <a href="{% url 'profile' user.id %}">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">{{ user.username }}</button></a>
+          <a href="{% url 'logout' %}">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Log Out</button></a>
+        </div>
+        {% else %}
+        <div>
+          <a href="{% url 'login' %}">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Sign In</button></a>
+          <a href="{% url 'relecloud:signup' %}">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">SIgn Up</button></a>
+        </div>
+        {% endif %}
+      </li>
+      </ul>
+  </div>
+</nav>
+<section style="background-color: #eee;">
+  <div class="py-5">
+
+    <div class="row">
+      <div class="col">
+        <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+          <ol class="breadcrumb mb-0">
+            <div class="col-lg-12">
+              {% if results %}
+              <li style="float: left; font-siz  e: 20px" class="breadcrumb-item" aria-current="page"><h6>You Searched for: {{ key }}</h6></li>
+              <li style="float: right" class=""> Found {{ resCount }} matches</li>
+              {% else %}
+              <li style="float: left; font-siz  e: 20px" class="breadcrumb-item" aria-current="page"><h6>You Searched for: {{ key }}</h6></li>
+              <li style="float: right" class=""> Not found</li>   
+              {% endif %}
+              <div>
+          </ol>
+        </nav>
+        <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+          {% for resp in results %}
+          <ol class="breadcrumb mb-0">
+            <a href="{% url 'movie' resp.id %}">
+            <div class="col-lg-12">
+              <li style="float: left; font-size: 30px;" class="breadcrumb-item" aria-current="page"><h5>{{ resp.title }} <p style="font-size: 12px;">({{ resp.release_date }})</p></h5></li>
+              <li class="" aria-current="page"></li>
+              <div>
+              </a>
+          </ol>
+          <hr>
+          {% endfor %}
+        </nav>  
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+<footer>
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-5 col-md-5 col-sm-4 col-xs-12">
+              <ul class="contact">
+                <p style="color: white; text-align: aut0;">Follow us on:</p>
+                <div class="mt-4">
+                  <!-- Facebook -->
+                  <a type="button" class="btn btn-floating btn-warning btn-lg"><i class="fab fa-facebook-f"></i></a>
+                   <!-- Twitter -->
+                  <a href="https://twitter.com/Terasedo" type="button" class="btn btn-floating btn-warning btn-lg"><i class="fab fa-twitter"></i></a>
+                  <!-- Google + -->
+                  <a type="button" class="btn btn-floating btn-warning btn-lg"><i class="fab fa-google-plus-g"></i></a>
+                  </div>
+              </ul>
+          </div>
+          
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+              <ul class="contact">
+                <li>
+                  <a href="/movies">All Movies</a>
+                </li>
+
+                <li>
+                  <a href="/kids">Kids</a>
+                </li>
+
+                <li>
+                  <a href="/adults">Adults</a>
+                </li>
+              </ul>
+          </div>
+     
+          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+              <ul class="contact">
+                 <li>
+                      <a href="#"><i class="fa fa-phone"></i> (+250) 780 575 468</a>
+                 </li>
+
+                 <li>
+                  <a href="#"><i class="fa fa-phone"></i> (+250) 785  845 731</a>
+             </li>
+                 <li>
+                      <a href="#"><i class="fa fa-envelope"></i> cinemania@gmail.com</a>
+                 </li>
+               </ul>
+          </div>
+     </div> 
+  </div>  
+  <div class="bfooter">
+    <p style="color: white;"> @2022 Copyrights &copy; Cinemania </p>
+    </div>      
+</footer>     
+            </div>
+        </body>
+</html>
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+$(".owl-carousel").owlCarousel({
+
+autoPlay: 3000,
+items : 4,
+itemsDesktop : [1199,3],
+itemsDesktopSmall : [979,3],
+center: true,
+nav:true,
+loop:true,
+responsive: {
+600: {
+items: 4
+}
+}
+</script>
+

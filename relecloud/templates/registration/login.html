@@ -1,0 +1,417 @@
+{% load static  %}
+
+{% comment %} {% if user.is_authenticated %}
+
+{% url 'home.html' %}
+
+{% else %} {% endcomment %}
+
+<!DOCTYPE html>
+	<html>
+	<head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Cinemania - Movies</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'stylings/styles.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'stylings/fontawesome/css/all.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'stylings/bootstrap/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" type="text/javascript" href="{% static 'stylings/bootstrap/js/bootstrap.min.js' %}">
+
+        <style type="text/css">
+.login-block {
+    margin: 30px auto;
+    min-height: 93.6vh
+}
+
+.login-block .auth-box {
+    margin: 20px auto 0;
+    max-width: 450px !important
+}
+
+.card {
+    border-radius: 5px;
+    -webkit-box-shadow: 0 0 5px 0 rgba(43, 43, 43, .1), 0 11px 6px -7px rgba(43, 43, 43, .1);
+    box-shadow: 0 0 5px 0 rgba(43, 43, 43, .1), 0 11px 6px -7px rgba(43, 43, 43, .1);
+    border: none;
+    margin-bottom: 30px;
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+    background-color: #fff
+}
+
+.card .card-block {
+    padding: 1.25rem
+}
+
+.f-80 {
+    font-size: 80px
+}
+
+.form-group {
+    margin-bottom: 1.25em
+}
+
+.form-material .form-control {
+    display: inline-block;
+    height: 43px;
+    width: 100%;
+    border: none;
+    border-radius: 0;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 9px;
+    background-color: transparent;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-bottom: 1px solid #ccc
+}
+
+.btn-md {
+    padding: 10px 16px;
+    font-size: 15px;
+    line-height: 23px
+}
+
+.btn-primary {
+    background-color: #4099ff;
+    border-color: #4099ff;
+    color: #fff;
+    cursor: pointer;
+    -webkit-transition: all ease-in .3s;
+    transition: all ease-in .3s
+}
+
+.btn {
+    border-radius: 2px;
+    text-transform: capitalize;
+    font-size: 15px;
+    padding: 10px 19px;
+    cursor: pointer
+}
+
+.m-b-20 {
+    margin-bottom: 20px
+}
+
+.btn-md {
+    padding: 10px 16px;
+    font-size: 15px;
+    line-height: 23px
+}
+
+.heading {
+    font-size: 21px
+}
+
+#infoMessage p {
+    color: red !important
+}
+
+.btn-google {
+    color: #545454;
+    background-color: #ffffff;
+    box-shadow: 0 1px 2px 1px #ddd
+}
+
+.or-container {
+    align-items: center;
+    color: #ccc;
+    display: flex;
+    margin: 0;
+    width: 100%
+}
+
+.line-separator {
+    background-color: #ccc;
+    flex-grow: 20;
+    height: 0.5px;
+    width: 20px
+}
+
+.or-label {
+    flex-grow: 1;
+    margin: 0 15px;
+    text-align: center
+}
+        .social-media {
+            text-align: left;
+    list-style: none;
+    display: block
+}
+
+.social-media li{
+    float: left;
+    padding: 10px;
+}
+            .right{
+                float: right;
+                list-style: none;
+                display: block;
+            }
+            .right li {
+                float: left
+            }
+            .right li{
+                color: white;
+            }
+            .right .sub a {
+                text-align:center;
+                text-decoration: none;
+                color: white;
+                background: blue;                
+                padding: 10px 20px 12px 20px;
+                transition: background 0.2s ease-in-out 
+            }
+            .right .sub a:hover {
+                background: darkblue
+            }
+            .user {
+                font-size:  28px;
+                transition: color 0.2s ease-in-out 
+            }
+            .user:hover {
+                color: whitesmoke
+            }
+            .video {
+                text-decoration: none;
+            }
+            .floating-label-group {
+	position: relative;
+	margin-top: 15px;
+	margin-bottom: 25px;
+
+	.floating-label {
+		font-size: 13px;
+		color: #cccccc;
+		position: absolute;
+		pointer-events: none;
+		top: 9px;
+		left: 12px;
+		transition: all 0.1s ease;
+	}
+
+	input:focus ~ .floating-label,
+	input:not(:focus):valid ~ .floating-label {
+		top: -15px;
+		bottom: 0px;
+		left: 0px;
+		font-size: 11px;
+		opacity: 1;
+		color: #404040;
+	}
+}
+
+.row {
+	margin-top: 50px;
+}
+.up-with li{
+    float: right;
+    padding-right: 20px
+}
+
+
+.center form
+{
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+form .txtfield
+{
+    position: relative;
+    border-bottom: 2px solid #adadad;
+    margin: 20px 0;
+}
+
+.txtfield input
+{
+    width: 100%;
+    padding: 0 5px;
+    height: 40px;
+    font-size: 16px;
+    color: black;
+    border: none;
+    background: none;
+    outline: none;
+    font-weight:400;
+}
+
+.txtfield label
+{
+    position:absolute;
+    top: 50%;
+    left: 5px;
+    color: gray;
+    transform: translateY(-50%);
+    font-size: 20px;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.txtfield span::before
+{
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 0px;
+    height: 2px;
+    background: #2691d9;
+    transition: .90s;
+}
+
+.txtfield input:focus ~ label,
+.txtfield input:valid ~ label{
+    top: -5px;
+    color: #2691d9;
+}
+
+.txtfield input:focus ~ span::before,
+.txtfield input:valid ~ span::before{
+   width: 100%; 
+}
+
+
+        </style>
+	</head>
+	<body style="background-image: url('{% static 'stylings/images/slides/chris2.jpg' %}');">
+        {% block content %}
+        <div class="fluid">
+            
+            <div class="nav-bar">
+                <nav style="background: #000000; box-shadow: box-show" class="navbar navbar-expand-lg">
+                    <a class="navbar-brand" style="font-size: 25px" href="index.html">CINEMANIA</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                  
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                      <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link text-whitesmoke active" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+                          </li>
+                          {% comment %} <li class="nav-item">
+                            <a class="nav-link text-whitesmoke" href="{% url 'movies' %}">Movies</a>
+                          </li> {% endcomment %}
+                            <li class="nav-item">
+                            <a class="nav-link text-whitesmoke" href="{% url 'adults' %}">Adults</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link text-whitesmoke" href="{% url 'kids' %}">Kids</a>
+                          </li>              
+                        </ul>                 
+                      <div class="topnav">
+                        <div class="search-container">
+                          <form action="{% url 'search' %}" method="POST" > {% csrf_token %} 
+                            <input type="text" placeholder="Search.." name="search">
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                          </form>
+                        </div>
+                      </div>                        
+                    </div>
+                  </nav>
+</div>
+<form method="post">
+  <div style="margin-bottom: 8em;" class="login-container text-c animated flipInX">
+    <div>
+        <h1 class="logo-badge text-whitesmoke"></h1>
+    </div>
+    <div class="container-content" style="background: white; color: Black;border-radius:60px">
+        <h2 style="text-align: center; color: black;" class="text-whitesmoke">Member Login</h2>
+        <hr style="background: white"><br>
+        
+        <form action="" method="post" class="margin-t"> 
+          {% csrf_token %}
+          <div class="txtfield">
+            <input type="text" required  {{ form.username }}
+            <span></span>
+            <label>Username</label>
+        </div>
+        <div class="txtfield">
+            <input type="password"   required {{ form.password }}
+            <span></span>
+            <label>Password</label>
+        </div>
+          {% comment %} {{ form.as_p }} {% endcomment %}
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <button style="margin-top: 18px; border-radius: 25px; width: 65%; float: center;" name="signin" type="submit" class="btn btn-primary margin-r">Sign In</button>
+            <div style="display: inline; margin-bottom: 20px" class="form-group">
+                </div>
+                
+                <a href="{% url 'password_reset' %}" style="float: center" >Forgot your password?</a>
+                <div style="margin-top: 1em; margin-bottom: 3em">
+                    <div class="or-container">
+                        <div style="border: 0.5px solid lightgray" class="line-separator"></div>
+                        <div class="or-label" style="text-align: center; color: black;">Or Sign In With</div>
+                        <div style="border: 1px solid lightgray" class="line-separator"></div>
+                    </div>                            
+                    <div class="social-media" style="margin-top: 20px; text-align: center">
+                    <a type="button" class="btn btn-floating btn-warning btn-lg"><i class="fab fa">Google - Account</i></a>
+                </div>
+                <hr style="background: lightgray;">
+                <p class="text-whitesmoke text-center" style="color: black; float: left;">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small>Don't have an account?</small>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a class="" href="{% url 'relecloud:signup' %}"><small><b>Create your Account</b></small></a></p>
+                </div>
+</form>
+    </div>
+</div>
+
+{% endblock %}
+
+{% comment %} {% endif %} {% endcomment %}
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 col-md-5 col-sm-4 col-xs-12">
+                <ul class="contact">
+                  <p style="color: white; text-align: aut0;">Follow us on:</p>
+                  <div class="mt-4">
+                    <!-- Facebook -->
+                    <a type="button" class="btn btn-floating btn-warning btn-lg"><i class="fab fa-facebook-f"></i></a>
+                    <!-- Twitter -->
+                    <a href="https://twitter.com/Terasedo" type="button" class="btn btn-floating btn-warning btn-lg"><i class="fab fa-twitter"></i></a>
+                    <!-- Google + -->
+                    <a type="button" class="btn btn-floating btn-warning btn-lg"><i class="fab fa-google-plus-g"></i></a>
+                  </div>
+                </ul>
+            </div>
+            
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <ul class="contact">
+                  <li>
+                    <a href="/movies">All Movies</a>
+                  </li>
+
+                  <li>
+                    <a href="/kids">Kids</a>
+                  </li>
+
+                  <li>
+                    <a href="/adults">Adults</a>
+                  </li>
+                </ul>
+            </div>
+       
+            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+                <ul class="contact">
+                   <li>
+                        <a href="#"><i class="fa fa-phone"></i> (+250) 780 575 468</a>
+                   </li>
+
+                   <li>
+                    <a href="#"><i class="fa fa-phone"></i> (+250) 785  845 731</a>
+               </li>
+                   <li>
+                        <a href="#"><i class="fa fa-envelope"></i> cinemania@gmail.com</a>
+                   </li>
+                 </ul>
+            </div>
+       </div> 
+    </div>  
+    <div class="bfooter">
+      <p style="color: white;"> @2022 Copyrights &copy; Cinemania </p>
+      </div>      
+</footer>     

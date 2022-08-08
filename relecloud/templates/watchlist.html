@@ -1,0 +1,305 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% if user.is_authenticated %}
+
+<!DOCTYPE html>
+	<html>
+	<head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		    <title>Cinemania - Movies</title>
+        
+        <link rel="stylesheet" type="text/css" href="{% static 'stylings/styles.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'stylings/fontawesome/css/all.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'stylings/bootstrap/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" type="text/javascript" href="{% static 'stylings/bootstrap/js/bootstrap.min.js' %}">
+        <script src="{% static 'stylings/bootstrap/dist/jquery.slim.min.js' %}"> </script>
+        <script src="{% static 'stylings/bootstrap/dist/bootstrap.min.js' %}"> </script>
+
+        <style type="text/css"> 
+            .right{
+                list-style: none;
+                display: block;
+            }
+            .right li {
+                float: left
+            }
+            .right li{
+                color: white;
+            }
+            .right .sub a {
+                text-align:center;
+                text-decoration: none;
+                color: white;
+                background: blue;                
+                padding: 10px 20px 12px 20px;
+                transition: background 0.2s ease-in-out 
+            }
+            .right .sub a:hover {
+                background: darkblue
+            }
+            .user {
+                font-size:  28px;
+                transition: color 0.2s ease-in-out 
+            }
+            .user:hover {
+                color: whitesmoke
+            }
+            .video {
+                text-decoration: none;
+            }
+              .stretch-card>.card {
+                width: 100%;
+                min-width: 100%
+            }
+
+            body {
+                background-color: #f9f9fa
+            }
+
+            .flex {
+                -webkit-box-flex: 1;
+                -ms-flex: 1 1 auto;
+                flex: 1 1 auto
+            }
+
+            @media (max-width:991.98px) {
+                .padding {
+                    padding: 1.5rem
+                }
+            }
+
+            @media (max-width:767.98px) {
+                .padding {
+                    padding: 1rem
+                }
+            }
+
+            .padding {
+                padding: 1rem
+            }
+
+            .carousel .item {
+                margin: 3px
+            }
+
+            .carousel .item img {
+                display: block;
+                width: 100%;
+                height: auto
+            }
+
+            .carousel .item {
+                margin: 3px
+            }
+
+            .carousel {
+                margin-bottom: 15px
+            }
+
+            .search-form .form-group {
+              float: right !important;
+              transition: all 0.35s, border-radius 0s;
+              width: 32px;
+              height: 1px;
+              background-color: #fff;
+              box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+              border-radius: 4px;
+              border: 1px solid #ccc;
+            }
+            .search-form .form-group input.form-control {
+              padding-right: 20px;
+              border: 0 none;
+              background: transparent;
+              box-shadow: none;
+              display:block;
+            }
+
+            .search-form .form-group:hover,
+            .search-form .form-group.hover {
+              width: 100%;
+              border-radius: 4px 25px 25px 4px;
+            }
+            .search-form .form-group span.form-control-feedback {
+              position: absolute;
+              top: -1px;
+              right: -2px;
+              z-index: 2;
+              display: block;
+              width: 34px;
+              height: 4px;
+              line-height: 34px;
+              text-align: center;
+              color: #3596e0;
+              left: initial;
+              font-size: 14px;
+            }
+            
+            
+        </style>
+        
+        </head>
+        <body>
+          {% block content %}
+
+            <div class="fluid">
+                <nav style="background: #000000; box-shadow: box-show;" class="navbar navbar-expand-lg">
+                    <a class="navbar-brand" style="font-size: 25px" href="{% url 'movies' %}"><b>CINEMANIA</b></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                      <span style="" class="navbar-toggler-icon"><i class="fa fa-settings"></i></span>
+                    </button>
+                  
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                      <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                          <a class="nav-link text-whitesmoke active" href="{% url 'movies' %}">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        {% comment %} <li class="nav-item">
+                          <a class="nav-link text-whitesmoke" href="{% url 'movies' %}">Movies</a>
+                        </li> {% endcomment %}
+                          <li class="nav-item">
+                          <a class="nav-link text-whitesmoke" href="{% url 'adults' %}">Adults</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link text-whitesmoke" href="{% url 'kids' %}">Kids</a>
+                        </li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                  
+                        {% if user.is_authenticated %}
+                        <li class="nav-item">
+                          <a class="nav-link text-whitesmoke" style="color:orange" href="{% url 'myfavs' user.id %}"><b>My favorite movies</b></a>
+                        </li> 
+                        {% endif %} 
+                      </ul>
+                  
+                      <div class="topnav">
+                        <div class="search-container">
+                          <form action="{% url 'search' %}" method="POST" > {% csrf_token %} 
+                            <input type="text" placeholder="Search.." name="search">
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                          </form>
+                        </div>
+                      </div>
+                  
+                      
+                      <ul class="right">
+                        {% if user.is_authenticated %}
+                          <div>
+                            <a href="{% url 'profile' user.id %}">
+                              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">{{ user.username }}</button></a>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              <a href="{% url 'logout' %}">
+                              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Log Out</button></a>
+                          </div>
+                  
+                          {% else %}
+                          <div> 
+                            <a href="{% url 'login' %}">
+                              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Sign In</button></a>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              <a href="{% url 'relecloud:signup' %}">
+                              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">SIgn Up</button></a>
+                          </div>
+                          {% endif %}
+                        </li>
+                        </ul>
+                    </div>
+                  </nav>
+                  <div>
+
+
+                    {% if user.is_authenticated %}
+                    <section style="background-color: #eee;">
+                        <div class="py-5">
+
+                          <div class="row">
+                            <div class="col">
+                              <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+                                <ol class="breadcrumb mb-0">
+                                  <div class="col-lg-12">
+                                    <div class="row">
+                                    <div class="col-lg-2">
+                                      <a class="btn btn-info" href="{% url 'myMovies' user.id %}">Movies I Uploaded</a>
+                                    </div>
+                                    {% comment %} <div class="col-lg-2">
+                                      <a  class="btn btn-info" href="{% url 'myfavs' user.id %}">My Favorites</a>
+                                    </div> {% endcomment %}
+                                    {% comment %} <div class="col-lg-2">
+                                      <a class="btn btn-info" href="{% url 'watchlist' user.id %}">My Watch List</a>
+                                    </div> {% endcomment %}
+                                    <div class="col-lg-10">
+                                      <a style="float: right" class="btn btn-primary" href="{% url 'upload' %}">Upload Movie</a>
+                                    </div>
+                                  </div>
+                                    <div>
+                                </ol>
+                              </nav>
+                            </div>
+                          </div>
+
+                            <div class="col-lg-12 w-50 mx-auto">
+                              <div  style="background: #eee; border: none" class="card mb-4">
+                                <div class="card-body">
+                                  <div class="row">
+                                    <table class="table table-hover table-striped">
+                                      <thead class="thead-dark table-striped">
+                                        <b>My watchlist movies</b>
+                                            <th scope="col">No</th>
+                                            <th scope="col">Title</th>
+                                            <th scope="col">Action</th>
+                                      </thead>
+
+                                        {% for movie in upMovies %}
+                                        <tr>
+                                            <td>{{ movie.id }}</td>
+                                            <td>{{ movie.movie }}</td>
+                                            <td  style="text-align: center">
+                                                <a href="{% url 'deleteMovie' movie.id %}" title="Delete {{ movie.title }}"><i class="fa fa-trash"></i></a>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </table>
+                                  </div>
+                                  
+                                </div>
+                              </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </section> 
+
+                      {% else %}
+                      {% url 'login' %}
+                      {% endif %}
+
+                      {% endblock %}
+                </div>
+        </body>
+</html>
+
+{% else %}
+
+{% url 'login' %}
+
+{% endif %}
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+$(".owl-carousel").owlCarousel({
+
+autoPlay: 3000,
+items : 4,
+itemsDesktop : [1199,3],
+itemsDesktopSmall : [979,3],
+center: true,
+nav:true,
+loop:true,
+responsive: {
+600: {
+items: 4
+}
+}
+</script>
+

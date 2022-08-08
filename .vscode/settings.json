@@ -1,0 +1,5 @@
+{
+    "python.linting.enabled": true,
+    "appService.defaultWebAppToDeploy": "/subscriptions/a19715c6-7b52-4c43-9547-21fc64f102b6/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/cinemania-movies",
+    "appService.deploySubpath": "."
+}

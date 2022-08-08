@@ -1,0 +1,407 @@
+{% load static  %}
+
+<!DOCTYPE html>
+	<html>
+	<head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Cinemania - Movies</title>
+        
+        <link rel="stylesheet" type="text/css" href="{% static 'stylings/styles.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'stylings/fontawesome/css/all.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'stylings/bootstrap/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" type="text/javascript" href="{% static 'stylings/bootstrap/js/bootstrap.min.js' %}">
+
+        <style type="text/css">
+   .login-block {
+    margin: 30px auto;
+    min-height: 93.6vh
+}
+
+.login-block .auth-box {
+    margin: 20px auto 0;
+    max-width: 450px !important
+}
+
+.card {
+    border-radius: 5px;
+    -webkit-box-shadow: 0 0 5px 0 rgba(43, 43, 43, .1), 0 11px 6px -7px rgba(43, 43, 43, .1);
+    box-shadow: 0 0 5px 0 rgba(43, 43, 43, .1), 0 11px 6px -7px rgba(43, 43, 43, .1);
+    border: none;
+    margin-bottom: 30px;
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+    background-color: #fff
+}
+
+.card .card-block {
+    padding: 1.25rem
+}
+
+.f-80 {
+    font-size: 80px
+}
+
+.form-group {
+    margin-bottom: 1.25em
+}
+
+.form-material .form-control {
+    display: inline-block;
+    height: 43px;
+    width: 100%;
+    border: none;
+    border-radius: 0;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 9px;
+    background-color: transparent;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-bottom: 1px solid #ccc
+}
+
+.btn-md {
+    padding: 10px 16px;
+    font-size: 15px;
+    line-height: 23px
+}
+
+.btn-primary {
+    background-color: #4099ff;
+    border-color: #4099ff;
+    color: #fff;
+    cursor: pointer;
+    -webkit-transition: all ease-in .3s;
+    transition: all ease-in .3s
+}
+
+.btn {
+    border-radius: 2px;
+    text-transform: capitalize;
+    font-size: 15px;
+    padding: 10px 19px;
+    cursor: pointer
+}
+
+.m-b-20 {
+    margin-bottom: 20px
+}
+
+.btn-md {
+    padding: 10px 16px;
+    font-size: 15px;
+    line-height: 23px
+}
+
+.heading {
+    font-size: 21px
+}
+
+#infoMessage p {
+    color: red !important
+}
+
+.btn-google {
+    color: #545454;
+    background-color: #ffffff;
+    box-shadow: 0 1px 2px 1px #ddd
+}
+
+.or-container {
+    align-items: center;
+    color: #ccc;
+    display: flex;
+    margin: 0;
+    width: 100%
+}
+
+.line-separator {
+    background-color: #ccc;
+    flex-grow: 20;
+    height: 0.5px;
+    width: 20px
+}
+
+.or-label {
+    flex-grow: 1;
+    margin: 0 15px;
+    text-align: center
+}
+        .social-media {
+            text-align: left;
+    list-style: none;
+    display: block
+}
+
+.social-media li{
+    float: left;
+    padding: 10px;
+}
+            .right{
+                float: right;
+                list-style: none;
+                display: block;
+            }
+            .right li {
+                float: left
+            }
+            .right li{
+                color: white;
+            }
+            .right .sub a {
+                text-align:center;
+                text-decoration: none;
+                color: white;
+                background: blue;                
+                padding: 10px 20px 12px 20px;
+                transition: background 0.2s ease-in-out 
+            }
+            .right .sub a:hover {
+                background: darkblue
+            }
+            .user {
+                font-size:  28px;
+                transition: color 0.2s ease-in-out 
+            }
+            .user:hover {
+                color: whitesmoke
+            }
+            .video {
+                text-decoration: none;
+            }
+            .floating-label-group {
+	position: relative;
+	margin-top: 15px;
+	margin-bottom: 25px;
+
+	.floating-label {
+		font-size: 13px;
+		color: #cccccc;
+		position: absolute;
+		pointer-events: none;
+		top: 9px;
+		left: 12px;
+		transition: all 0.1s ease;
+	}
+
+	input:focus ~ .floating-label,
+	input:not(:focus):valid ~ .floating-label {
+		top: -15px;
+		bottom: 0px;
+		left: 0px;
+		font-size: 11px;
+		opacity: 1;
+		color: #404040;
+	}
+}
+
+.row {
+	margin-top: 50px;
+}
+.up-with li{
+    float: right;
+    padding-right: 20px
+}
+#sti
+            {
+              position: -webkit-sticky;
+              position: sticky;
+              top: 0;
+            }
+            ul{
+                list-style-type:none;
+            }
+            p{
+                padding: 10px;
+            }
+        </style>
+	</head>
+	<body style="background-image: url('{% static 'stylings/images/slides/chris2.jpg' %}');">
+        {% block content %}
+        <div class="fluid" id="sti">
+            
+            <div class="nav-bar">
+                <nav style="background: #000000; box-shadow: box-show; opacity:90%;" class="navbar navbar-expand-lg" id="sti">
+                    <a class="navbar-brand" style="font-size: 25px" href="{% url 'movies' %}"><b>CINEMANIA</b></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                  
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                      <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                          <a class="nav-link text-whitesmoke active" href="{% url 'movies' %}">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        {% comment %} <li class="nav-item">
+                          <a class="nav-link text-whitesmoke" href="{% url 'movies' %}">All Movies</a>
+                        </li> {% endcomment %}
+                        <li class="nav-item">
+                            <a class="nav-link text-whitesmoke" href="{% url 'adults' %}">Adults</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link text-whitesmoke" href="{% url 'kids' %}">Kids</a>
+                          </li>                       
+                      </ul>
+                  
+                      <div class="topnav">
+                        <div class="search-container">
+                          <form action="{% url 'search' %}" method="POST" > {% csrf_token %} 
+                            <input type="text" placeholder="Search.." name="search">
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                          </form>
+                        </div>
+                      </div>
+                  
+                        <ul class="right">
+                        <a href="{% url 'login' %}">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Sign In</button></a>
+                        </div>
+                        </li>
+                        </ul>
+                  
+                        
+                        
+                    </div>
+                  </nav>
+</div>
+
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <center><div style="background-color: lightslategrey; color:black; border-radius:28px;width:650px;" class="container-content">
+        <h2 style="text-align: center; color: black;" class="text-whitesmoke">Register here</h2>
+        <hr style="background: white"><br>   
+       <form action="" method="post"  enctype="multipart/form-data"> 
+          {% csrf_token %}
+          <label style="width: 100%; text-align: left">Username:</label><input class="form-control" placeholder="Username" {{ form.username }} <br>
+
+{% if form.username.errors %}
+    <div class="alert alert-danger" role="alert">
+        {{form.username.errors}}
+    </div>
+{% endif %}
+    
+          <label style="width: 100%; text-align: left">Firstname:</label><input class="form-control" placeholder="Firstname" {{ form.first_name }} <br>
+
+{% if form.first_name.errors %}
+<div class="alert alert-danger" role="alert">
+    {{form.first_name.errors}}
+</div>
+{% endif %}         
+          
+          <label style="width: 100%; text-align: left">Lastname:</label><input class="form-control" placeholder="Lastname" {{ form.last_name }} <br>
+          
+{% if form.last_name.errors %}
+<div class="alert alert-danger" role="alert">
+    {{form.last_name.errors}}
+</div>
+{% endif %}
+          
+          <label style="width: 100%; text-align: left">Email:</label><input class="form-control" placeholder="Email" {{ form.email }} <br>
+          
+{% if form.email.errors %}
+<div class="alert alert-danger" role="alert">
+    {{form.email.errors}}
+</div>
+{% endif %} 
+          
+          <label style="width: 100%; text-align: left">Age:</label><input class="form-control" placeholder="Age" {{ form.age }} <br>
+          
+{% if form.age.errors %}
+<div class="alert alert-danger" role="alert">
+{{form.age.errors}}
+</div>
+{% endif %}
+          
+          <label style="width: 100%; text-align: left">Gender:</label><select class="form-control" placeholder="Gender" {{ form.gender }} <br>
+          
+{% if form.gender.errors %}
+<div class="alert alert-danger" role="alert">
+{{form.gender.errors}}
+</div>
+{% endif %}          
+          
+            <label style="width: 100%; text-align: left">Profile Picture:</label><input class="form-control" placeholder="Profile Picture" {{ form.profile_image }} <br>
+          
+{% if form.profile_image.errors %}
+<div class="alert alert-danger" role="alert">
+{{form.profile_image.errors}}
+</div>
+{% endif %}   
+          
+            <label style="width: 100%; text-align: left">Password</label><input class="form-control" placeholder="Password" {{ form.password1 }} <br>
+          
+{% if form.password1.errors %}
+<div class="alert alert-danger" role="alert">
+{{form.password1.errors}}
+</div>
+{% endif %}         
+          
+            <label style="width: 100%; text-align: left">Confirm Password</label><input class="form-control" placeholder="Confirm Password" {{ form.password2 }} <br> 
+        
+{% if form.password2.errors %}
+<div class="alert alert-danger" role="alert">
+{{form.password2.errors}}
+</div>
+{% endif %}
+
+        <button style="margin-top: 18px; border-radius: 25px; name="signup" type="submit" class="w-100 btn btn-primary margin-r">Sign Up</button> 
+                
+    </div><br>
+</center>
+{% endblock %}
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 col-md-5 col-sm-4 col-xs-12">
+                <ul class="contact">
+                  <p style="color: white; text-align: aut0;">Follow us on:</p>
+                  <div class="mt-4">
+                    <!-- Facebook -->
+                    <a type="button" class="btn btn-floating btn-warning btn-lg"><i class="fab fa-facebook-f"></i></a>
+                    <!-- Twitter -->
+                    <a href="https://twitter.com/Terasedo" type="button" class="btn btn-floating btn-warning btn-lg"><i class="fab fa-twitter"></i></a>
+                    <!-- Google + -->
+                    <a type="button" class="btn btn-floating btn-warning btn-lg"><i class="fab fa-google-plus-g"></i></a>
+                  </div>
+                </ul>
+            </div>
+            
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <ul class="contact">
+                  <li>
+                    <a href="/movies">All Movies</a>
+                  </li>
+
+                  <li>
+                    <a href="/kids">Kids</a>
+                  </li>
+
+                  <li>
+                    <a href="/adults">Adults</a>
+                  </li>
+                </ul>
+            </div>
+       
+            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+                <ul class="contact">
+                   <li>
+                        <a href="#"><i class="fa fa-phone"></i> (+250) 780 575 468</a>
+                   </li>
+
+                   <li>
+                    <a href="#"><i class="fa fa-phone"></i> (+250) 785  845 731</a>
+               </li>
+                   <li>
+                        <a href="#"><i class="fa fa-envelope"></i> cinemania@gmail.com</a>
+                   </li>
+                 </ul>
+            </div>
+       </div> 
+    </div>  
+    <div class="bfooter">
+      <p style="color: white;"> @2022 Copyrights &copy; Cinemania </p>
+      </div>      
+</footer>
